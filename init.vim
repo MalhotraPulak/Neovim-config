@@ -9,9 +9,6 @@ nnoremap <leader><leader> <c-^>
 " Set no compatiblity mode
 set nocompatible
 
-" Remap escape
-inoremap jk <Esc>
-
 " Sane splits
 set splitright
 set splitbelow
@@ -29,7 +26,6 @@ set expandtab
 set autoread
 set cursorline
 set wildmenu
-set relativenumber
 
 "Decrease time in which vims stores swap to disk
 set updatetime=100
@@ -99,11 +95,11 @@ noremap <Leader>s :update<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 " Source vimrc
-nnoremap <leader>sv :source $MYVIMRC<cr>
+" nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Clear highlighted entries
 nnoremap <leader>c :nohl<CR><C-l>
-
+ 
 " For python stuff
 au BufNewFile,BufRead *.py
     \ set fileformat=unix
@@ -130,8 +126,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Check the plugin status：:PlugStatus
 " Upgrade vim-plug itself：:PlugUpgrade
 
-" Gruvbox theme
-Plug 'gruvbox-community/gruvbox'
+" Theme 
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Airline status bar
 Plug 'vim-airline/vim-airline'
@@ -155,9 +151,6 @@ Plug 'Yggdroot/indentLine'
 " Syntax highligthing for js files
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
-
-" Vim Go!!!!
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 " VimWiki
 Plug 'vimwiki/vimwiki'
@@ -236,7 +229,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'clangd', 'rust_analyzer', 'racket_langserver'}
+local servers = { 'pyright', 'clangd', 'rust_analyzer', 'racket_langserver', 'gopls'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -251,12 +244,12 @@ EOF
 " Colorscheme settings
 let t_Co=256
 set notermguicolors
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
+" let g:gruvbox_italic=1
+" let g:gruvbox_contrast_dark='hard'
+colorscheme dracula 
 
 " Airline settings
-let g:airline_theme='gruvbox'
+" let g:airline_theme='gruvbox'
 let g:airline#extensions#tabline#enabled = 1
 
 " Open vertical terminal on f5
